@@ -104,3 +104,12 @@ AdGuard Home — это удобный и мощный инструмент дл
 Нажмите в самом верху на "Настройки" → "Настройки DNS":
 
 **Upstream DNS-серверы**
+
+ ```bash
+https://router.comss.one/dns-query
+https://dns.comss.one/dns-query
+tls://dns.comss.one
+quic://dns.comss.one
+#Соцсети
+[/cdninstagram.com/facebook.com/facebook.net/fbcdn.com/fbcdn.net/ig.me/instagram.com/facebook.com.es/facebook.com.vn/facebook.fr/fb.com/fb.me/fbsbx.com/licdn.com/tfbnw.net/thefacebook.com/akamaized.net/twimg.com/twitter.com/x.com/tweetdeck.com/t.co/]https://ns1.opennameserver.org/dns-query https://ns2.opennameserver.org/dns-query https://ns3.opennameserver.org/dns-query
+```
