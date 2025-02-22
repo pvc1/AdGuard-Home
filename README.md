@@ -13,11 +13,14 @@ AdGuard Home — это удобный и мощный инструмент дл
 
 Это даёт расширенный контроль над вашей сетью.
 
-## I. Установка
+**ASUS** - поставьте прошивку роутера от Merlin ([нажмите сюда](https://www.asuswrt-merlin.net/about)). После чего используйте команду **amtm** в консоли зайдя через SSH, потом введите - **i**, потом - **ep**. Для дальнейшей установки Entware Вам потребуется использовать любой VPN или [nfqws](https://github.com/Anonym-tsk/nfqws-keenetic) НА САМОМ роутере
 
-1.  Установите поддержку репозитория Entware по инструкции для вашего роутера.
+## I. Установка для Keenetic
+
+*Для дальнейших действий рекомендую использовать [Termius](https://termius.com/download) либо иные SSH-клиенты на ваш выбор.*
+
+1.  Установите поддержку репозитория Entware для вашего роутера:
 *   **Keenetic** - [нажмите сюда](https://help.keenetic.com/hc/ru/articles/360021214160-%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D1%8B-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F-Entware-%D0%BD%D0%B0-USB-%D0%BD%D0%B0%D0%BA%D0%BE%D0%BF%D0%B8%D1%82%D0%B5%D0%BB%D1%8C)
-*   **ASUS** - поставьте прошивку роутера от Merlin ([нажмите сюда](https://www.asuswrt-merlin.net/about)). Для дальнейшей установки Entware Вам потребуется включить любой VPN или [nfqws](https://github.com/Anonym-tsk/nfqws-keenetic) на самом роутере, после чего используйте команду **amtm** в консоли по SSH, введите - i, далее - ep.
 
 2.  Установите AdGuard Home, запустив команды в консоли с Entware:
 
