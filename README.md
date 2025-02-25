@@ -1,1 +1,1 @@
-# AdGuard Home на Entware
+# Установка и настройка AdGuard Home
