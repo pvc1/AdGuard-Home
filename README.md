@@ -10,10 +10,10 @@
 
 Содержание [Wiki](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home):
 
-I. [Установка AdGuard Home](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#i-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-entware-%D0%B8-adguard-home-%D0%BD%D0%B0-%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80%D1%8B)<br>
-1. [Для роутеров Keenetic](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#1-%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80%D1%8B-keenetic)<br>
-2. [Для роутеров на прошивках OpenWRT](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#3-%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80%D1%8B-%D0%BD%D0%B0-openwrt)<br>
-3. [Для роутеров ASUS](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#2-%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80%D1%8B-asus)<br>
+I. [Установка AdGuard Home](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#i-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-adguard-home)<br>
+1. [Для роутеров Keenetic](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#1-%D0%B4%D0%BB%D1%8F-%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80%D0%BE%D0%B2-keenetic)<br>
+2. [Для роутеров на прошивках OpenWRT](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#2-%D0%B4%D0%BB%D1%8F-%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80%D0%BE%D0%B2-%D0%BD%D0%B0-%D0%BF%D1%80%D0%BE%D1%88%D0%B8%D0%B2%D0%BA%D0%B0%D1%85-openwrt)<br>
+3. [Для роутеров ASUS](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#3-%D0%B4%D0%BB%D1%8F-%D1%80%D0%BE%D1%83%D1%82%D0%B5%D1%80%D0%BE%D0%B2-asus)<br>
 4. [Для систем Linux (Debian, Ubuntu и т.д.)](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#4-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC-linux-debian-ubuntu-%D0%B8-%D1%82%D0%B4)<br>
 
 II. [Настройка AdGuard Home](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#ii-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-adguard-home)<br>
