@@ -9,7 +9,7 @@
 > [!WARNING]
 > ВНИМАНИЕ!  
 > В настоящее время наблюдаются перебои в работе [Comss DNS](https://www.comss.ru/page.php?id=7315), вероятно из-за блокировок зарубежных хостеров Роскомнадзором.  
-> В разделе [«Настройки DNS»](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#3-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-dns) указан дополнительный список DNS для работы нейросетей.
+> В разделе [«Настройки DNS»](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home#3-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8-dns) указан дополнительный список DNS для работы с нейросетями.
 
 Содержание [Wiki](https://github.com/Internet-Helper/AdGuard-Home/wiki/AdGuard-Home):
 
