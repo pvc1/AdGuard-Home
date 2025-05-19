@@ -1,3 +1,7 @@
+Нравится проект? Поддержи автора через [CloudTips](https://pay.cloudtips.ru/p/ddeac224) или [Юмани](https://yoomoney.ru/to/41001945296522) на чашечку кофе ☕ 
+
+***
+
 # Установка и настройка AdGuard Home
 
 > [!IMPORTANT]
