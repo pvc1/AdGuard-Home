@@ -1,4 +1,4 @@
-Нравится проект? Поддержи аренду сервера GeoHide DNS через [CloudTips](https://pay.cloudtips.ru/p/ddeac224) или [Юмани](https://yoomoney.ru/to/41001945296522) или скинь на чашечку кофе ☕ 
+Нравится проект? Можете поддержать аренду сервера GeoHide DNS через [CloudTips](https://pay.cloudtips.ru/p/ddeac224) или [Юмани](https://yoomoney.ru/to/41001945296522), либо скинуть на чашечку кофе ☕ 
 
 ***
 
