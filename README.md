@@ -27,7 +27,7 @@
 
 ***
 
-# [Нажмите сюда для установки и настройки AdGuard Home](https://github.com/Internet-Helper/AdGuard-Home/wiki)
+# [Нажмите сюда для установки AdGuard Home](https://github.com/Internet-Helper/AdGuard-Home/wiki)
 
 ***
 
