@@ -1,12 +1,14 @@
-Нравится проект? Можете поддержать аренду сервера GeoHide DNS через [CloudTips](https://pay.cloudtips.ru/p/ddeac224) или [Юмани](https://yoomoney.ru/to/41001945296522), либо скинуть на чашечку кофе ☕
-
 > [!IMPORTANT]
 > Автор не несет ответственности за неправомерное использование данного материала.  
 > Вы пользуетесь этой инструкцией на свой страх и риск!  
 > Автор не несёт ответственности за порчу оборудования, программного обеспечения и любых подобных проблем.  
 > Подразумевается, что вы понимаете, что вы делаете.
 
+<br>
+
 ![1](https://github.com/user-attachments/assets/2b759e30-141a-4921-91a8-d1230323a744)
+
+<br>
 
 [AdGuard Home](https://adguard.com/ru/adguard-home/overview.html) — это удобный и мощный инструмент для управления интернетом в вашей сети на уровне DNS/DHCP.
 
@@ -25,6 +27,8 @@
 
 ***
 
-# Нажмите сюда → [Установка и настройка AdGuard Home](https://github.com/Internet-Helper/AdGuard-Home/wiki)
+# [Нажмите сюда для установки и настройки AdGuard Home](https://github.com/Internet-Helper/AdGuard-Home/wiki)
 
 ***
+
+Нравится проект? Можете поддержать аренду сервера GeoHide DNS через [CloudTips](https://pay.cloudtips.ru/p/ddeac224) или [Юмани](https://yoomoney.ru/to/41001945296522), либо скинуть на чашечку кофе ☕
