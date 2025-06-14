@@ -10,6 +10,14 @@
 
 <br>
 
+***
+
+<h1 align="center">
+  <a href="https://github.com/Internet-Helper/AdGuard-Home/wiki">Нажмите сюда для установки AdGuard Home</a>
+</h1>
+
+***
+
 [AdGuard Home](https://adguard.com/ru/adguard-home/overview.html) — это удобный и мощный инструмент для управления интернетом в вашей сети на уровне DNS/DHCP.
 
 Для всей сети и каждого устройства отдельно можно:
@@ -22,10 +30,6 @@
 *   Просматривать журнал запросов и общую статистику посещений.
 
 Для дальнейших действий необохдимо использовать любой SSH-клиент, например [Termius](https://termius.com/download).
-
-***
-
-# [Нажмите сюда для установки AdGuard Home](https://github.com/Internet-Helper/AdGuard-Home/wiki)
 
 ***
 
