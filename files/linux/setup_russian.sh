@@ -30,8 +30,8 @@ RESOLV_CONF_PATH="/etc/resolv.conf";
 RESOLV_BACKUP_PATH="/etc/resolv.conf.adh-backup"
 ADH_SERVICE_NAME="AdGuardHome.service"
 ADH_INSTALL_SCRIPT_URL="https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh"
-CONFIG_URL_RU="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/refs/heads/main/files/russian/AdGuardHome.yaml"
-CONFIG_URL_EN="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/refs/heads/main/files/english/AdGuardHome.yaml"
+CONFIG_URL_RU="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/refs/heads/main/files/linux/russian/AdGuardHome.yaml"
+CONFIG_URL_EN="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/refs/heads/main/files/linux/english/AdGuardHome.yaml"
 
 # --- ФУНКЦИИ-ПЕРЕХВАТЧИКИ И ОЧИСТКИ ---
 # Перехватывает завершение скрипта, при ошибке выполняет откат изменений.
