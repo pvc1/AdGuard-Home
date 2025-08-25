@@ -27,7 +27,7 @@ dns:
     - 45.95.233.23
     - 64.188.98.242
     - '# Для соцсетей'
-    - '[/cdninstagram.com/facebook.com/facebook.net/fbcdn.com/fbcdn.net/ig.me/instagram.com/facebook.com.es/facebook.com.vn/facebook.fr/fb.com/fb.me/fbsbx.com/licdn.com/tfbnw.net/thefacebook.com/akamaized.net/twimg.com/twitter.com/x.com/tweetdeck.com/t.co/github.com/github.io/entware.net/openwrt.org/]https://ns1.opennameserver.org/dns-query https://ns2.opennameserver.org/dns-query https://ns3.opennameserver.org/dns-query'
+    - '[/cdninstagram.com/facebook.com/facebook.net/fbcdn.com/fbcdn.net/ig.me/instagram.com/facebook.com.es/facebook.com.vn/facebook.fr/fb.com/fb.me/fbsbx.com/licdn.com/tfbnw.net/thefacebook.com/akamaized.net/twimg.com/twitter.com/x.com/tweetdeck.com/t.co/github.com/github.io/githubusercontent.com/entware.net/openwrt.org/]https://ns1.opennameserver.org/dns-query https://ns2.opennameserver.org/dns-query https://ns3.opennameserver.org/dns-query'
   upstream_dns_file: ""
   bootstrap_dns:
     - 1.1.1.1
