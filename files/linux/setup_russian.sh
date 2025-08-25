@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# AdGuard Home Easy Setup by Internet Helper v1.0 (Start)
+# AdGuard Home Easy Setup by Internet Helper v1.1 (Start)
 
 # Выход из скрипта при любой ошибке, включая ошибки в конвейерах (pipes)
 set -e
@@ -30,8 +30,11 @@ RESOLV_CONF_PATH="/etc/resolv.conf";
 RESOLV_BACKUP_PATH="/etc/resolv.conf.adh-backup"
 ADH_SERVICE_NAME="AdGuardHome.service"
 ADH_INSTALL_SCRIPT_URL="https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh"
-CONFIG_URL_RU="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/refs/heads/main/files/linux/russian/AdGuardHome.yaml"
-CONFIG_URL_EN="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/refs/heads/main/files/linux/english/AdGuardHome.yaml"
+CONFIG_URL_RU="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/main/files/linux/russian/AdGuardHome.yaml"
+CONFIG_URL_EN="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/main/files/linux/english/AdGuardHome.yaml"
+CONFIG_URL_RU_NO_ADS="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/main/files/linux/russian/ad-filters-off/AdGuardHome.yaml"
+CONFIG_URL_EN_NO_ADS="https://raw.githubusercontent.com/Internet-Helper/AdGuard-Home/main/files/linux/english/ad-filters-off/AdGuardHome.yaml"
+
 
 # --- ФУНКЦИИ-ПЕРЕХВАТЧИКИ И ОЧИСТКИ ---
 # Перехватывает завершение скрипта, при ошибке выполняет откат изменений.
@@ -196,19 +199,61 @@ EOF
 # Сохраняет имя пользователя, хэш пароля и сетевые настройки из текущей конфигурации.
 save_user_credentials() {
     if [ ! -f "$ADH_CONFIG_FILE" ]; then error "Файл конфигурации не найден: $ADH_CONFIG_FILE"; return 1; fi
-    USER_NAME=$(yq eval '.users[0].name // "admin"' "$ADH_CONFIG_FILE"); USER_PASS_HASH=$(yq eval '.users[0].password // ""' "$ADH_CONFIG_FILE"); HTTP_ADDRESS=$(yq eval '.http.address // "0.0.0.0:80"' "$ADH_CONFIG_FILE"); DNS_BIND_HOST=$(yq eval '.dns.bind_hosts[0] // "0.0.0.0"' "$ADH_CONFIG_FILE"); DNS_PORT=$(yq eval '.dns.port // 53' "$ADH_CONFIG_FILE")
-    if [ -z "$USER_NAME" ] || [ -z "$USER_PASS_HASH" ]; then
-        info "Не найден сохраненный профиль. Установлены учетные данные по умолчанию: логин 'admin', пароль 'adminadmin'"
-        USER_NAME="admin"; USER_PASS_HASH='$2a$10$ran/S7NMc.GAhm0ac3wTbuWV2LVLxfxwNg5xGZC0b5PHWsykOHxey';
+    
+    # Пытаемся прочитать существующие учетные данные
+    USER_NAME=$(yq eval '.users[0].name' "$ADH_CONFIG_FILE")
+    USER_PASS_HASH=$(yq eval '.users[0].password' "$ADH_CONFIG_FILE")
+    HTTP_ADDRESS=$(yq eval '.http.address // "0.0.0.0:80"' "$ADH_CONFIG_FILE")
+    DNS_BIND_HOST=$(yq eval '.dns.bind_hosts[0] // "0.0.0.0"' "$ADH_CONFIG_FILE")
+    DNS_PORT=$(yq eval '.dns.port // 53' "$ADH_CONFIG_FILE")
+
+    # Если учетные данные не найдены, запрашиваем у пользователя новые
+    if [ "$USER_NAME" = "null" ] || [ -z "$USER_NAME" ] || [ "$USER_PASS_HASH" = "null" ] || [ -z "$USER_PASS_HASH" ]; then
+        info "Учетные данные не найдены. Необходимо создать нового пользователя."
+        local NEW_USER_NAME=""
+        local NEW_USER_PASS=""
+        while [ -z "$NEW_USER_NAME" ]; do
+            read -p "Пожалуйста, введите новый логин: " NEW_USER_NAME
+        done
+        while [ -z "$NEW_USER_PASS" ]; do
+            read -s -p "Пожалуйста, введите новый пароль: " NEW_USER_PASS
+            printf "\n"
+        done
+        
+        USER_NAME="$NEW_USER_NAME"
+        unset USER_PASS_HASH
+        USER_PASS_PLAIN="$NEW_USER_PASS"
+        success "Новые учетные данные приняты."
     fi
 }
 
 # Применяет сохраненные учетные данные и сетевые настройки к новому файлу конфигурации.
 apply_user_credentials() {
     local target_file="$1"; if [ ! -f "$target_file" ]; then return 1; fi
-    yq eval ".users[0].name = \"$USER_NAME\"" -i "$target_file"; yq eval ".users[0].password = \"$USER_PASS_HASH\"" -i "$target_file"; yq eval ".http.address = \"$HTTP_ADDRESS\"" -i "$target_file"; yq eval ".dns.bind_hosts[0] = \"$DNS_BIND_HOST\"" -i "$target_file"; yq eval ".dns.port = $DNS_PORT" -i "$target_file"
-    if [ "$(yq eval '.users | length' "$target_file")" = "0" ]; then yq eval '.users = [{"name": "'"$USER_NAME"'", "password": "'"$USER_PASS_HASH"'"}]' -i "$target_file"; fi
+
+    local password_value
+    if [ -n "$USER_PASS_HASH" ]; then
+        password_value="$USER_PASS_HASH"
+    elif [ -n "$USER_PASS_PLAIN" ]; then
+        password_value="$USER_PASS_PLAIN"
+    else
+        error "Не удалось определить пароль для применения."
+        return 1
+    fi
+
+    # Применяем все настройки
+    yq eval ".users[0].name = \"$USER_NAME\"" -i "$target_file"
+    yq eval ".users[0].password = \"$password_value\"" -i "$target_file"
+    yq eval ".http.address = \"$HTTP_ADDRESS\"" -i "$target_file"
+    yq eval ".dns.bind_hosts[0] = \"$DNS_BIND_HOST\"" -i "$target_file"
+    yq eval ".dns.port = $DNS_PORT" -i "$target_file"
+
+    # Гарантируем, что массив users существует, если его не было в шаблоне
+    if [ "$(yq eval '.users | length' "$target_file")" == "0" ]; then
+         yq eval '.users = [{"name": "'"$USER_NAME"'", "password": "'"$password_value"'"}]' -i "$target_file"
+    fi
 }
+
 
 # Создает резервную копию текущей конфигурации пользователя.
 create_user_backup() {
@@ -258,9 +303,25 @@ install_adh() {
         printf "\n"
         while true; do printf "Выберите конфигурацию:\n1. Для российского сервера\n2. Для зарубежного сервера\n"; read -p "Ваш выбор [1-2]: " cfg_choice; if [[ "$cfg_choice" == "1" || "$cfg_choice" == "2" ]]; then break; else warning "Некорректный ввод."; fi; done
         
+        local use_ad_blocking
+        if prompt_yes_no "Включить блокировку рекламы?"; then
+            use_ad_blocking=true
+        else
+            use_ad_blocking=false
+        fi
+
+        local target_url; local target_local_path
+        if [ "$cfg_choice" -eq 1 ]; then # Российский сервер
+            target_local_path="$LOCAL_CONFIG_RU"
+            if [ "$use_ad_blocking" = true ]; then target_url="$CONFIG_URL_RU"; else target_url="$CONFIG_URL_RU_NO_ADS"; fi
+        else # Зарубежный сервер
+            target_local_path="$LOCAL_CONFIG_EN"
+            if [ "$use_ad_blocking" = true ]; then target_url="$CONFIG_URL_EN"; else target_url="$CONFIG_URL_EN_NO_ADS"; fi
+        fi
+        
         printf "\n"
         info "Замена началась, подождите..."
-        if [ "$cfg_choice" -eq 1 ]; then get_config "$CONFIG_URL_RU" "$LOCAL_CONFIG_RU"; else get_config "$CONFIG_URL_EN" "$LOCAL_CONFIG_EN"; fi
+        get_config "$target_url" "$target_local_path"
         apply_user_credentials "$ADH_CONFIG_FILE"
     fi
 
@@ -291,20 +352,44 @@ change_config() {
     done
     
     save_user_credentials; info "Применение конфигурации..."
+    
+    local should_apply_credentials=false
     case $choice in
-        1) get_config "$CONFIG_URL_RU" "$LOCAL_CONFIG_RU" ;;
-        2) get_config "$CONFIG_URL_EN" "$LOCAL_CONFIG_EN" ;;
-        3) if [ -f "$LOCAL_CONFIG_STD" ]; then cp "$LOCAL_CONFIG_STD" "$ADH_CONFIG_FILE"; else error "Файл стандартной конфигурации не найден."; return 1; fi ;;
-        4) if [ -f "$LOCAL_CONFIG_USER" ]; then cp "$LOCAL_CONFIG_USER" "$ADH_CONFIG_FILE"; else error "Пользовательская резервная копия не найдена."; return 1; fi ;;
+        1|2)
+            local use_ad_blocking
+            if prompt_yes_no "Включить блокировку рекламы?"; then
+                use_ad_blocking=true
+            else
+                use_ad_blocking=false
+            fi
+
+            local target_url; local target_local_path
+            if [ "$choice" -eq 1 ]; then # Российский сервер
+                target_local_path="$LOCAL_CONFIG_RU"
+                if [ "$use_ad_blocking" = true ]; then target_url="$CONFIG_URL_RU"; else target_url="$CONFIG_URL_RU_NO_ADS"; fi
+            else # Зарубежный сервер
+                target_local_path="$LOCAL_CONFIG_EN"
+                if [ "$use_ad_blocking" = true ]; then target_url="$CONFIG_URL_EN"; else target_url="$CONFIG_URL_EN_NO_ADS"; fi
+            fi
+            get_config "$target_url" "$target_local_path"
+            should_apply_credentials=true
+            ;;
+        3) 
+            if [ -f "$LOCAL_CONFIG_STD" ]; then cp "$LOCAL_CONFIG_STD" "$ADH_CONFIG_FILE"; else error "Файл стандартной конфигурации не найден."; return 1; fi 
+            ;;
+        4) 
+            if [ -f "$LOCAL_CONFIG_USER" ]; then cp "$LOCAL_CONFIG_USER" "$ADH_CONFIG_FILE"; else error "Пользовательская резервная копия не найдена."; return 1; fi 
+            ;;
     esac
     
-    if [[ "$choice" == "1" || "$choice" == "2" ]]; then 
+    if [ "$should_apply_credentials" = true ]; then 
         apply_user_credentials "$ADH_CONFIG_FILE"
     fi
     
     force_session_ttl "$ADH_CONFIG_FILE"; systemctl restart "$ADH_SERVICE_NAME"; wait_for_adh_service
     success "Конфигурация успешно применена. Проверьте работу AdGuard Home."
 }
+
 
 # Тестирует работоспособность AdGuard Home (разрешение имен, блокировка, DNSSEC).
 test_adh() {
@@ -347,10 +432,8 @@ test_adh() {
 
     printf "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
     if $all_tests_ok; then
-        success "AdGuard Home работает корректно."
         return 0 
     else 
-        error "Возможны проблемы в работе AdGuard Home."
         if [ "$1" == "--silent" ]; then
             return 1
         else
